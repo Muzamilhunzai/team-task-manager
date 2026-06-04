@@ -64,9 +64,9 @@ export const addMember = async (teamId, userEmail, user) => {
         if (user.role !== 'admin') {
              throw new Error('Only admins can add members');
         }
-        // If they are admin but not creator, maybe they can still add? 
-        // Requirements say "ADMIN (Team Creator / Super User)". 
-        // Let's allow any admin to add members if they are the creator or if they are super user.
+        
+        
+        
     }
     
     await pool.query(

@@ -66,12 +66,9 @@ export default function App() {
   );
 }
 
-/*
-  Legacy layout code kept below intentionally (not rendered) to minimize risk of breaking
-  other components while we fix routing/loading-screen issues.
-*/
+
 function AppLayout() {
-  const auth = useAuth(); // SAFE ACCESS (prevents crash)
+  const auth = useAuth(); 
   const user = auth?.user;
   const logout = auth?.logout;
 
@@ -101,7 +98,7 @@ function AppLayout() {
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex">
       
-      {/* BACKDROP FOR MOBILE SIDEBAR */}
+      {}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/60 z-40 lg:hidden"
@@ -109,7 +106,7 @@ function AppLayout() {
         />
       )}
 
-      {/* SIDEBAR */}
+      {}
       <aside
         className={`
           fixed lg:static z-50
@@ -144,10 +141,10 @@ function AppLayout() {
         </nav>
       </aside>
 
-      {/* MAIN AREA */}
+      {}
       <div className="flex-1 flex flex-col">
         
-        {/* HEADER */}
+        {}
         <header className="h-16 border-b border-zinc-800 px-6 flex items-center justify-between">
           
           <div className="flex items-center gap-3">
@@ -181,7 +178,7 @@ function AppLayout() {
           </div>
         </header>
 
-        {/* PAGE CONTENT */}
+        {}
         <main className="flex-1 p-6 overflow-auto">
           <Outlet />
         </main>

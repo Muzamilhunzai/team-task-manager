@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.use(ensureAuthenticated);
 
-// GET /api/dashboard/tasks/stats
+
 router.get('/tasks/stats', async (req, res) => {
     try {
         const userId = req.user.id;
         const isAdmin = req.user.role === 'admin';
 
-        // For simplicity, we'll count tasks the user is involved in
+        
         const query = isAdmin
             ? `SELECT 
                 COUNT(*) as total,
@@ -33,7 +33,7 @@ router.get('/tasks/stats', async (req, res) => {
             totalTasks: parseInt(stats.total),
             completedTasks: parseInt(stats.completed),
             trends: {
-                tasks: 5.2, // Dummy trend
+                tasks: 5.2, 
                 completed: 12.5
             }
         });
@@ -43,7 +43,7 @@ router.get('/tasks/stats', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/projects/stats
+
 router.get('/projects/stats', async (req, res) => {
     try {
         const userId = req.user.id;
@@ -61,11 +61,11 @@ router.get('/projects/stats', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/teams/stats
+
 router.get('/teams/stats', async (req, res) => {
     try {
         const userId = req.user.id;
-        // Total unique members in all teams user is in
+        
         const result = await pool.query(
             `SELECT COUNT(DISTINCT user_id) as total 
              FROM team_members 
@@ -82,7 +82,7 @@ router.get('/teams/stats', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/tasks/recent
+
 router.get('/tasks/recent', async (req, res) => {
     try {
         const userId = req.user.id;
@@ -116,7 +116,7 @@ router.get('/tasks/recent', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/tasks/upcoming-deadlines
+
 router.get('/tasks/upcoming-deadlines', async (req, res) => {
     try {
         const userId = req.user.id;
@@ -138,11 +138,11 @@ router.get('/tasks/upcoming-deadlines', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/tasks/productivity
+
 router.get('/tasks/productivity', async (req, res) => {
     try {
         const userId = req.user.id;
-        // Last 7 days productivity
+        
         const result = await pool.query(
             `SELECT 
                 TO_CHAR(date_trunc('day', d), 'YYYY-MM-DD') as date,
@@ -165,7 +165,7 @@ router.get('/tasks/productivity', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/projects/progress
+
 router.get('/projects/progress', async (req, res) => {
     try {
         const userId = req.user.id;
@@ -191,12 +191,12 @@ router.get('/projects/progress', async (req, res) => {
     }
 });
 
-// GET /api/dashboard/teams/activity
+
 router.get('/teams/activity', async (req, res) => {
     try {
         const userId = req.user.id;
-        // Mocking activity since we don't have an activity log table
-        // We'll use recent task updates as activity
+        
+        
         const result = await pool.query(
             `SELECT 
                 t.id,

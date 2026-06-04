@@ -5,7 +5,7 @@ import { createUser, findUserByEmail, findUserByUsername } from '../models/user.
 
 const router = express.Router();
 
-// Register
+
 router.post('/register', async (req, res) => {
     const { error, value } = validateRegister(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login
+
 router.post('/login', (req, res, next) => {
     const { error } = validateLogin(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -48,14 +48,14 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-// Logout
+
 router.post('/logout', (req, res) => {
     req.logout(() => {
         res.json({ message: 'Logged out successfully' });
     });
 });
 
-// Get current user
+
 router.get('/me', (req, res) => {
     if (req.isAuthenticated()) {
         res.json({ user: req.user });

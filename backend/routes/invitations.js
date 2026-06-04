@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use(ensureAuthenticated);
 
-// POST /api/invitations - SEND (Admin only)
+
 router.post('/', isAdmin, [
     body('email').isEmail().withMessage('Invalid email format').normalizeEmail(),
     body('teamId').isInt().withMessage('Valid team ID required')
@@ -40,7 +40,7 @@ router.post('/', isAdmin, [
     }
 });
 
-// GET /api/invitations/my - LIST for current user
+
 router.get('/my', async (req, res) => {
     try {
         const invitations = await getUserInvitations(req.user.email);
@@ -50,7 +50,7 @@ router.get('/my', async (req, res) => {
     }
 });
 
-// GET /api/invitations/sent - LIST for admin
+
 router.get('/sent', isAdmin, async (req, res) => {
     try {
         const invitations = await getAdminSentInvitations(req.user.id);
@@ -60,7 +60,7 @@ router.get('/sent', isAdmin, async (req, res) => {
     }
 });
 
-// POST /api/invitations/:id/accept
+
 router.post('/:id/accept', async (req, res) => {
     try {
         const invitation = await findInvitationById(req.params.id);
@@ -69,7 +69,7 @@ router.post('/:id/accept', async (req, res) => {
         }
 
         await updateInvitationStatus(invitation.id, 'ACCEPTED');
-        await addMember(invitation.team_id, req.user.email, { role: 'admin' }); // bypass creator check via mock object
+        await addMember(invitation.team_id, req.user.email, { role: 'admin' }); 
 
         await createNotification(invitation.sender_id, `${req.user.username} accepted your invitation.`, 'info');
 
@@ -80,7 +80,7 @@ router.post('/:id/accept', async (req, res) => {
     }
 });
 
-// POST /api/invitations/:id/decline
+
 router.post('/:id/decline', async (req, res) => {
     try {
         const invitation = await findInvitationById(req.params.id);

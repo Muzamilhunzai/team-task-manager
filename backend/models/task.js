@@ -13,7 +13,7 @@ export const createTask = async (taskData, createdBy) => {
 export const getTasksByTeam = async (teamId, user) => {
     const isAdmin = user.role === 'admin';
 
-    // Admins should only see tasks they created (even within teams they are a member of)
+    
     const query = isAdmin
         ? `SELECT t.*, u.username as assignee_name, creator.username as creator_name
            FROM tasks t
@@ -34,7 +34,7 @@ export const getTasksByTeam = async (teamId, user) => {
 };
 
 export const getTasksByAssignee = async (assigneeId, user) => {
-    // If user is not admin and trying to see others' tasks, restrict to self
+    
     const targetId = (user.role !== 'admin') ? user.id : assigneeId;
     
     const result = await pool.query(
@@ -135,12 +135,12 @@ export const updateTaskStatus = async (taskId, status, user) => {
     if (taskResult.rows.length === 0) throw new Error('Task not found');
     const task = taskResult.rows[0];
 
-    // Check if user is assigned to this task or the creator
+    
     if (task.assignee_id !== user.id && task.created_by !== user.id) {
         throw new Error('You can only update status of tasks assigned to you or created by you');
     }
 
-    // Regular users can only change from pending to accepted/declined, or others if they are already in progress
+    
     if (user.role !== 'admin') {
         if (task.status === 'pending' && !['accepted', 'declined'].includes(status)) {
             throw new Error('You can only accept or decline pending tasks');

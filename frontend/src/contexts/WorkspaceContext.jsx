@@ -14,7 +14,7 @@ export function WorkspaceProvider({ children }) {
 
   useEffect(() => {
     setWorkspaceId(workspaceIdFromRoute ?? null);
-    // Placeholder: until backend workspace endpoints exist, we keep a stub name.
+    
     setWorkspaceName(workspaceIdFromRoute ? `Workspace #${workspaceIdFromRoute}` : null);
   }, [workspaceIdFromRoute]);
 

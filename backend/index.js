@@ -57,7 +57,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 
-// Increased limit for development/active testing
+
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 1000, 

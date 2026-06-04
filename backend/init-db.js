@@ -92,7 +92,7 @@ async function initDatabase() {
     console.log('Connected to database');
     await client.query(createTablesSQL);
     
-    // Ensure role column exists (in case table was created before role was added)
+    
     try {
         await client.query("ALTER TABLE users ADD COLUMN IF NOT EXISTS role VARCHAR(20) DEFAULT 'user'");
     } catch (e) {
@@ -101,7 +101,7 @@ async function initDatabase() {
 
     console.log('✅ Tables created successfully (or already exist)');
 
-    // Migration for invitations table
+    
     try {
         await client.query('ALTER TABLE invitations ADD COLUMN IF NOT EXISTS team_id INTEGER REFERENCES teams(id) ON DELETE CASCADE');
         await client.query('ALTER TABLE invitations ADD COLUMN IF NOT EXISTS sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE');

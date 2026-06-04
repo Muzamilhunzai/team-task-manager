@@ -25,7 +25,7 @@ export default function AddMemberModal({ team, onClose, onMemberAdded }) {
   const addMember = async (e) => {
     e.preventDefault();
     try {
-      // First try to add directly
+      
       await api.post(`/teams/${team.id}/members`, { email });
       toast.success('Member added!');
       setEmail('');
@@ -33,7 +33,7 @@ export default function AddMemberModal({ team, onClose, onMemberAdded }) {
       onMemberAdded?.();
     } catch (error) {
       if (error.response?.status === 404) {
-        // If user not found, ask if they want to invite them
+        
         if (confirm('User not found. Send a team invitation instead?')) {
           try {
             await api.post('/invitations', { email, teamId: team.id });

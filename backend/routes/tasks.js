@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(ensureAuthenticated);
 
-// Get task reminders
+
 router.get('/reminders', async (req, res) => {
     try {
         const reminders = await getTaskReminders(req.user.id);
@@ -19,7 +19,7 @@ router.get('/reminders', async (req, res) => {
     }
 });
 
-// Get tasks with filters
+
 router.get('/', async (req, res) => {
     const { teamId, assigneeId } = req.query;
     try {
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Create task - Admin only
+
 router.post('/', isAdmin, async (req, res) => {
     const { error } = validateTask(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -57,8 +57,8 @@ router.post('/', isAdmin, async (req, res) => {
     }
 });
 
-// Update task details - creator/admin only (full edit).
-// Note: Non-admin users are allowed to attempt edits; updateTask() will enforce creator-only.
+
+
 router.put('/:id', async (req, res) => {
     const { error } = validateTask(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -71,7 +71,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Update task status - Anyone (with restrictions in model)
+
 router.patch('/:id/status', async (req, res) => {
     const { status } = req.body;
     if (!status) return res.status(400).json({ error: 'Status required' });
@@ -84,7 +84,7 @@ router.patch('/:id/status', async (req, res) => {
     }
 });
 
-// Delete task - Admin only
+
 router.delete('/:id', isAdmin, async (req, res) => {
     try {
         await deleteTask(req.params.id, req.user);

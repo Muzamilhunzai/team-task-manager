@@ -17,7 +17,7 @@ export const Login = () => {
   };
 
   const handleDemoLogin = async (role) => {
-    // Demo credentials (must exist in DB; create them from Register page)
+    
     const demo = role === 'admin'
       ? { email: 'admin-demo@example.com', password: 'password123' }
       : { email: 'demo@example.com', password: 'password123' };

@@ -3,7 +3,7 @@ import api from '../api';
 import { FiPlus, FiTrash2, FiUsers } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import AddMemberModal from './AddMemberModal';
-import { useAuth } from '../contexts/AuthContext';  // ✅ Moved to top
+import { useAuth } from '../contexts/AuthContext';  
 
 export const TeamList = ({ selectedTeam, onSelectTeam, onTeamChange }) => {
   const [teams, setTeams] = useState([]);
@@ -11,7 +11,7 @@ export const TeamList = ({ selectedTeam, onSelectTeam, onTeamChange }) => {
   const [newTeamName, setNewTeamName] = useState('');
   const [newTeamDesc, setNewTeamDesc] = useState('');
   const [showMembersModal, setShowMembersModal] = useState(null);
-  const { user } = useAuth();  // ✅ Now works
+  const { user } = useAuth();  
 
   useEffect(() => {
     fetchTeams();
@@ -109,7 +109,7 @@ export const TeamList = ({ selectedTeam, onSelectTeam, onTeamChange }) => {
         </div>
       </div>
 
-      {/* Create Team Modal */}
+      {}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50" onClick={() => setShowCreateModal(false)}>
           <div className="glass-card p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>

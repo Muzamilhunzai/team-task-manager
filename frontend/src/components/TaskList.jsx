@@ -122,7 +122,7 @@ export const TaskList = ({ teamId, refreshTrigger }) => {
                 </div>
                 
                 <div className="flex gap-2 transition-all">
-                  {/* User specific actions */}
+                  {}
                   {!isAdmin && task.status === 'pending' && (
                     <>
                       <button
@@ -158,7 +158,7 @@ export const TaskList = ({ teamId, refreshTrigger }) => {
                     </button>
                   )}
 
-                  {/* Admin specific actions - only for task creator */}
+                  {}
                   {isAdmin && task.created_by === user.id && (
                     <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
                       <button

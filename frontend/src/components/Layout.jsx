@@ -20,13 +20,13 @@ export const Layout = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-[#030305] text-white">
-      {/* Background Orbs */}
+      {}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[120px]" />
       </div>
 
-      {/* Header */}
+      {}
       <header className="relative z-10 border-b border-white/[0.06] bg-[#0a0a12]/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
@@ -60,7 +60,7 @@ export const Layout = ({ children }) => {
         </div>
       </header>
 
-      {/* Main Content */}
+      {}
       <main className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         {children}
       </main>

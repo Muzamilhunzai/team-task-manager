@@ -2,7 +2,7 @@ import cron from 'node-cron';
 import { getAllTasksDueSoon } from './models/task.js';
 
 export const initReminderJob = () => {
-    // Run every hour
+    
     cron.schedule('0 * * * *', async () => {
         console.log('Running background reminder job...');
         try {

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(ensureAuthenticated);
 
-// Create team - Admin only
+
 router.post('/', isAdmin, async (req, res) => {
     const { error } = validateTeam(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -22,7 +22,7 @@ router.post('/', isAdmin, async (req, res) => {
     }
 });
 
-// Invite member (Stub) - Admin only
+
 router.post('/:id/invite', isAdmin, async (req, res) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ error: 'Email required' });
@@ -35,7 +35,7 @@ router.post('/:id/invite', isAdmin, async (req, res) => {
     }
 });
 
-// Get user's teams
+
 router.get('/', async (req, res) => {
     try {
         const teams = await getUserTeams(req.user);
@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Get team details
+
 router.get('/:id', async (req, res) => {
     try {
         const team = await getTeamById(req.params.id, req.user);
@@ -56,7 +56,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Add member - Admin only
+
 router.post('/:id/members', isAdmin, async (req, res) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ error: 'Email required' });
@@ -64,7 +64,7 @@ router.post('/:id/members', isAdmin, async (req, res) => {
     try {
         const user = await findUserByEmail(email);
         if (!user) {
-            // Stub: trigger invite logic if user not found
+            
             console.log(`[STUB] User ${email} not found. Triggering invite.`);
             return res.status(404).json({ error: 'User not found', inviteSent: true });
         }
@@ -76,7 +76,7 @@ router.post('/:id/members', isAdmin, async (req, res) => {
     }
 });
 
-// Get team members
+
 router.get('/:id/members', async (req, res) => {
     try {
         const members = await getTeamMembers(req.params.id);
@@ -86,7 +86,7 @@ router.get('/:id/members', async (req, res) => {
     }
 });
 
-// Remove member - Admin only
+
 router.delete('/:id/members/:userId', isAdmin, async (req, res) => {
     try {
         await removeMember(req.params.id, parseInt(req.params.userId), req.user);
@@ -96,7 +96,7 @@ router.delete('/:id/members/:userId', isAdmin, async (req, res) => {
     }
 });
 
-// Delete team - Admin only
+
 router.delete('/:id', isAdmin, async (req, res) => {
     try {
         await deleteTeam(req.params.id, req.user);

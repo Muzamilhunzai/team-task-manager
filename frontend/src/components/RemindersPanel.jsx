@@ -21,7 +21,7 @@ export const RemindersPanel = () => {
 
   useEffect(() => {
     fetchReminders();
-    // Auto-refresh every 5 minutes
+    
     const interval = setInterval(fetchReminders, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
@@ -58,7 +58,7 @@ export const RemindersPanel = () => {
       </div>
 
       <div className="space-y-6">
-        {/* Overdue Section */}
+        {}
         {reminders.overdue.length > 0 && (
           <div>
             <h4 className="text-red-400 text-sm font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
@@ -80,7 +80,7 @@ export const RemindersPanel = () => {
           </div>
         )}
 
-        {/* Due Soon Section */}
+        {}
         {reminders.dueSoon.length > 0 && (
           <div>
             <h4 className="text-yellow-400 text-sm font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">

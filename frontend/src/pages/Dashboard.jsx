@@ -5,7 +5,7 @@ import { RemindersPanel } from '../components/RemindersPanel';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../api';
 
-// ───────────────────────────── Utility functions ─────────────────────────────
+
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
@@ -18,7 +18,7 @@ function formatCompact(n) {
   return `${num}`;
 }
 
-/** Convert an ISO date string or timestamp to a human‑readable relative time. */
+
 function timeAgo(dateInput) {
   const now = Date.now();
   const then = new Date(dateInput).getTime();
@@ -35,7 +35,7 @@ function timeAgo(dateInput) {
   return new Date(then).toLocaleDateString();
 }
 
-/** Return a friendly label like "Tomorrow", "In 3 days", etc. */
+
 function formatDueLabel(dateInput) {
   const now = new Date();
   const due = new Date(dateInput);
@@ -48,7 +48,7 @@ function formatDueLabel(dateInput) {
   return due.toLocaleDateString();
 }
 
-/** Classify urgency based on due date. */
+
 function urgencyFromDueDate(dateInput) {
   const now = Date.now();
   const due = new Date(dateInput).getTime();
@@ -58,7 +58,7 @@ function urgencyFromDueDate(dateInput) {
   return 'safe';
 }
 
-// ───────────────────────────── Visual components ─────────────────────────────
+
 
 function StatusBadge({ status }) {
   const map = {
@@ -202,12 +202,12 @@ function ProductivityAreaChart({ series }) {
   );
 }
 
-// ───────────────────────────── Main Dashboard ─────────────────────────────
+
 
 export function Dashboard() {
   const { user } = useAuth();
 
-  // Raw API data states
+  
   const [stats, setStats] = useState(null);
   const [recentTasks, setRecentTasks] = useState([]);
   const [upcomingDeadlines, setUpcomingDeadlines] = useState([]);
@@ -248,7 +248,7 @@ export function Dashboard() {
       const progress = pick(6) || [];
       const activity = pick(7) || [];
 
-      // Check if essential stats failed
+      
       if (!tasksStats && !projectsStats && !teamsStats) {
         setError('Failed to load dashboard data. Please try again.');
         return;
@@ -271,18 +271,18 @@ export function Dashboard() {
     fetchData();
   }, [fetchData]);
 
-  // ──────── Derived metrics from real API data ────────
+  
   const totalTasks = stats?.tasksStats?.totalTasks ?? 0;
   const completedTasks = stats?.tasksStats?.completedTasks ?? 0;
   const activeProjects = stats?.projectsStats?.activeProjects ?? 0;
   const teamMembers = stats?.teamsStats?.teamMembers ?? 0;
 
-  // Completion rate
+  
   const completionRate = totalTasks > 0
     ? Math.round((completedTasks / totalTasks) * 100)
     : 0;
 
-  // Momentum: percentage growth of tasks completed this week compared to last week
+  
   const momentum = useMemo(() => {
     const vals = productivitySeries.map((d) => d.tasks);
     if (vals.length < 2) return 0;
@@ -292,7 +292,7 @@ export function Dashboard() {
     return Math.round(((last - first) / first) * 100);
   }, [productivitySeries]);
 
-  // Risk index: derived from overdue tasks and urgent deadlines
+  
   const riskIndex = useMemo(() => {
     const overdueCount = recentTasks.filter(
       (t) => t.status === 'overdue' || t.status === 'blocked'
@@ -303,13 +303,13 @@ export function Dashboard() {
     const soonCount = upcomingDeadlines.filter(
       (d) => urgencyFromDueDate(d.dueDate) === 'soon'
     ).length;
-    return overdueCount * 12 + urgentCount * 8 + soonCount * 4; // scale 0-40
+    return overdueCount * 12 + urgentCount * 8 + soonCount * 4; 
   }, [recentTasks, upcomingDeadlines]);
 
-  // Operational health label
+  
   const operationalHealth = riskIndex > 22 ? 'Degraded' : 'Healthy';
 
-  // KPI cards with dynamic trend if available
+  
   const kpiCards = useMemo(() => {
     const trends = stats?.tasksStats?.trends || {};
     return [
@@ -336,7 +336,7 @@ export function Dashboard() {
     ];
   }, [totalTasks, completedTasks, activeProjects, teamMembers, stats]);
 
-  // Transform upcoming deadlines with computed urgency and label
+  
   const formattedDeadlines = useMemo(() => {
     return upcomingDeadlines.map((d) => ({
       ...d,
@@ -345,7 +345,7 @@ export function Dashboard() {
     }));
   }, [upcomingDeadlines]);
 
-  // Transform recent tasks to include relative time
+  
   const formattedRecent = useMemo(() => {
     return recentTasks.map((t) => ({
       ...t,
@@ -353,7 +353,7 @@ export function Dashboard() {
     }));
   }, [recentTasks]);
 
-  // Transform team activity with avatar gradients
+  
   const formattedActivity = useMemo(() => {
     const colors = [
       'from-indigo-400 to-violet-400',
@@ -371,7 +371,7 @@ export function Dashboard() {
     }));
   }, [teamActivity]);
 
-  // Productivity chart data
+  
   const chartSeries = useMemo(
     () =>
       productivitySeries.map((d) => ({
@@ -381,14 +381,14 @@ export function Dashboard() {
     [productivitySeries],
   );
 
-  // Sparkline values (last 8 entries)
+  
   const sparkValues = useMemo(() => chartSeries.slice(-8).map((d) => d.value), [chartSeries]);
 
   const heroSubtitle = user?.role
     ? `Your ${user.role} workspace — dashboards update in real time.`
     : 'Your workspace — dashboards update in real time.';
 
-  // ────── Loading and error states ──────
+  
   if (loading) {
     return (
       <SaaSLayout>
@@ -419,7 +419,7 @@ export function Dashboard() {
 
   return (
     <SaaSLayout>
-      {/* HERO */}
+      {}
       <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-indigo-500/20 via-violet-500/15 to-purple-500/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl overflow-hidden">
         <div className="relative p-6 sm:p-8">
           <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-indigo-400/30 via-violet-400/20 to-purple-500/30 blur-3xl" />
@@ -457,7 +457,7 @@ export function Dashboard() {
             </div>
           </div>
 
-          {/* Live data badges */}
+          {}
           <div className="relative mt-6 flex flex-wrap gap-3 items-center">
             <div className="rounded-3xl border border-white/10 bg-[#1b1b2f]/70 backdrop-blur-xl px-4 py-3">
               <div className="text-xs text-white/50">Today's momentum</div>

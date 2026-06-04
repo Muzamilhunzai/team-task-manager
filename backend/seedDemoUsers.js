@@ -29,7 +29,7 @@ async function seed() {
     for (const u of USERS) {
       const hashed = await bcrypt.hash(PASSWORD_PLAIN, 10);
 
-      // Upsert by email
+      
       await client.query(
         `INSERT INTO users (username, email, password_hash, role)
          VALUES ($1, $2, $3, $4)

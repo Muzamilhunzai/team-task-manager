@@ -62,7 +62,7 @@ export function Invitations() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        {/* Pending Requests for User */}
+        {}
         <div>
           <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
             <FiMail className="text-indigo-400" /> Pending Requests
@@ -107,7 +107,7 @@ export function Invitations() {
           </div>
         </div>
 
-        {/* Sent Invitations Tracker for Admins */}
+        {}
         {isAdmin && (
           <div>
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">

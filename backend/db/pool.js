@@ -11,7 +11,7 @@ dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }, // Required for Neon
+  ssl: { rejectUnauthorized: false }, 
   max: 10,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,

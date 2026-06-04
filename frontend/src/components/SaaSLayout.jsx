@@ -69,7 +69,7 @@ export default function SaaSLayout({ children }) {
     setSearchValue('');
   };
 
-  // Close dropdown on outside click
+  
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -82,7 +82,7 @@ export default function SaaSLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a1a2e] to-[#16213e] text-white">
-      {/* Mobile sidebar overlay */}
+      {}
       {mobileNavOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/50 md:hidden"
@@ -91,7 +91,7 @@ export default function SaaSLayout({ children }) {
       )}
 
       <div className="flex">
-        {/* Sidebar */}
+        {}
         <aside
           className={`fixed md:sticky top-0 z-50 md:z-auto h-screen w-72 overflow-y-auto bg-[#1e1e2f]/95 backdrop-blur border-r border-white/10 transition-transform duration-200 md:translate-x-0 flex flex-col ${
             mobileNavOpen ? 'translate-x-0' : '-translate-x-full'
@@ -158,9 +158,9 @@ export default function SaaSLayout({ children }) {
           </div>
         </aside>
 
-        {/* Content */}
+        {}
         <div className="flex-1 min-w-0">
-          {/* Top Navbar */}
+          {}
           <div className="sticky top-0 z-30 bg-[#1e1e2f]/80 backdrop-blur border-b border-white/10">
             <div className="w-full flex items-center justify-between px-4 py-3 sm:px-6">
               <div className="flex items-center gap-3">
@@ -199,7 +199,7 @@ export default function SaaSLayout({ children }) {
                   {dark ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}
                 </button>
 
-                {/* Custom Avatar Dropdown */}
+                {}
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -238,7 +238,7 @@ export default function SaaSLayout({ children }) {
         </div>
       </div>
 
-      {/* Search Modal */}
+      {}
       {searchOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-[#1e1e2f] border border-white/10 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
