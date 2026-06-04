@@ -93,7 +93,7 @@ app.use(session({
         httpOnly: true,
         secure: isProd,
         maxAge: 1000 * 60 * 60 * 24,
-        sameSite: 'lax',
+        sameSite: isProd ? 'none' : 'lax',
     }
 }));
 
