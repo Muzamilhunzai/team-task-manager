@@ -16,6 +16,11 @@ export const findUserByEmail = async (email) => {
     return result.rows[0];
 };
 
+export const findUserByUsername = async (username) => {
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+    return result.rows[0];
+};
+
 export const findUserById = async (id) => {
     const result = await pool.query('SELECT id, username, email, role, created_at FROM users WHERE id = $1', [id]);
     return result.rows[0];

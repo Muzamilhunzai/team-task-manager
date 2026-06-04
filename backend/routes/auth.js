@@ -1,22 +1,29 @@
 import express from 'express';
 import passport from 'passport';
 import { validateRegister, validateLogin } from '../middleware/validation.js';
-import { createUser, findUserByEmail } from '../models/user.js';
-import bcrypt from 'bcrypt';
+import { createUser, findUserByEmail, findUserByUsername } from '../models/user.js';
 
 const router = express.Router();
 
 // Register
 router.post('/register', async (req, res) => {
-    const { error } = validateRegister(req.body);
+    const { error, value } = validateRegister(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
     
-    const { username, email, password, role } = req.body;
+    const { username, email, password, role } = value;
     try {
-        const existingUser = await findUserByEmail(email);
-        if (existingUser) {
+        const [existingEmail, existingUsername] = await Promise.all([
+            findUserByEmail(email),
+            findUserByUsername(username)
+        ]);
+
+        if (existingEmail) {
             return res.status(400).json({ error: 'Email already exists' });
         }
+        if (existingUsername) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+
         const user = await createUser(username, email, password, role);
         res.status(201).json({ message: 'Registration successful', user });
     } catch (err) {
